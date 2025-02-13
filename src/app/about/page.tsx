@@ -1,76 +1,37 @@
 "use client";
 
-import React, { use, useCallback } from "react";
+import React, { useCallback } from "react";
 import { TypeAnimation } from "react-type-animation";
-import { motion } from "motion/react";
-import Link from "next/link";
-import Image from "next/image";
+import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLaptop } from "@fortawesome/free-solid-svg-icons/faLaptop";
+import { faLaptopCode } from "@fortawesome/free-solid-svg-icons/faLaptopCode";
 
-export const AboutPage = () => {
-  const downloadCV = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    window.open("/Resume of Michael Sum.docx");
-  }, []);
-
+const AboutPage = () => {
   return (
-    <section className="lg:py-16">
-      <div className="flex flex-col py-4 items-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="col-span-8 place-self-center text-center sm:text-left justify-self-start"
-        >
-          <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-8xl lg:leading-normal font-extrabold">
-            <span className="bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
-              Hello, I&apos;m{" "}
-            </span>
-            <br />
-            <TypeAnimation
-              sequence={[
-                "Michael",
-                1500,
-                "Full Stack Developer",
-                1500,
-                "Software Engineer",
-                1500,
-                "Business Analyst",
-                1500,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
+    <section className="lg:py-16 pt-20 sm:pt-16">
+      <div>
+        <h1 className="text-4xl mt-3 text-center font-bold">About Me</h1>
+        <p className="mt-3 text-pretty mx-5">
+          Experienced Software Engineer and Business Analyst with
+          <span className="font-bold text-cyan-400"> over 4 years</span> in
+          software development, bridging business needs with technical
+          solutions. Skilled in JavaScript, React, Node.js, C#, and SQL etc...
+          <br></br>
+          <br></br>I excel in building user-focused applications and
+          collaborating with diverse stakeholders. Passionate about continuous
+          learning and innovation, I'm eager to transition fully into a
+          development role.
+        </p>
+        <div className="mt-5 font-semibold mx-5">
+          <h1 className="text-xl">
+            Skills
+            <FontAwesomeIcon icon={faLaptopCode} className="mx-1" />
           </h1>
-        </motion.div>
-        <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl"></p>
-        <div>
-          <Link
-            href="#contact"
-            className="px-6 inline-block py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
-          >
-            Contact Me
-          </Link>
-          <Link
-            href="#"
-            onClick={downloadCV}
-            className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3"
-          >
-            <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
-              Download CV
-            </span>
-          </Link>
-        </div>
-        <div>
-          <Image
-            src="/profile_pic.png"
-            alt="profile_pic"
-            className="rounded-full mt-8"
-            width={200}
-            height={200}
-          />
         </div>
       </div>
     </section>
   );
 };
+
+export default AboutPage;

@@ -9,15 +9,15 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 const navLinks = [
   {
     title: "About",
-    href: "#about",
+    href: "/about",
   },
   {
     title: "Projects",
-    href: "#projects",
+    href: "/projects",
   },
   {
     title: "Contact",
-    href: "#contact",
+    href: "/contact",
   },
 ];
 
@@ -26,13 +26,19 @@ export function Navbar() {
   const toggleMenu = () => {
     SetIsOpen(!isOpen);
   };
+  const closeNavMenu = () => {
+    if (isOpen) {
+      SetIsOpen(false);
+    }
+  };
 
   return (
-    <nav className="fixed mx-auto border border-[#33353F] top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-100">
+    <nav className="fixed top-0 left-0 right-0 z-10 mx-auto border border-[#33353F] bg-[#121212] bg-opacity-100">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           href={"/"}
-          className="md:text-5xl text-white font-semibold hover:text-cyan-500"
+          className="md:text-5xl text-white font-semibold hover:scale-125"
+          onClick={closeNavMenu}
         >
           <FontAwesomeIcon className="text-3xl" icon={faHouse} />
         </Link>
@@ -43,7 +49,7 @@ export function Navbar() {
             {navLinks.map((link, index) => (
               <li key={index}>
                 <Link
-                  className="block py-2 pl-3 pr-4 text-[#ADB7BE] sm:text-xl rounded md:p-0  hover:text-cyan-500"
+                  className="block py-2 pl-3 pr-4 text-[#ADB7BE] sm:text-xl rounded md:p-0 hover:text-white"
                   href={link.href}
                   title={link.title}
                 >
@@ -58,7 +64,7 @@ export function Navbar() {
         <div className="md:hidden">
           <button
             type="button"
-            className="text-slate-200 hover:text-cyan-500"
+            className="text-slate-200 hover:scale-125"
             onClick={toggleMenu}
           >
             <FontAwesomeIcon
@@ -75,7 +81,7 @@ export function Navbar() {
               {navLinks.map((link, index) => (
                 <li key={index}>
                   <Link
-                    className="text-[#ADB7BE] text-lg hover:text-cyan-500"
+                    className="text-[#ADB7BE] text-lg hover:text-white"
                     href={link.href}
                     onClick={toggleMenu}
                   >
