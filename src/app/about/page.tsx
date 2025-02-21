@@ -5,53 +5,55 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLaptopCode, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import { Tooltip } from "../styles/Tooltip";
+import { Tooltip } from "../components/ui/Tooltip";
 
 const AboutPage = () => {
   const frontendSvg = [
-    { name: "JavaScript", src: "/js.svg" },
-    { name: "TypeScript", src: "/ts.svg" },
-    { name: "React", src: "/react.svg" },
-    { name: "NextJs", src: "/nextjs.svg" },
-    { name: "React Native", src: "/react_native.svg" },
-    { name: "Expo", src: "/expo.svg" },
-    { name: "Tailwind CSS", src: "/tailwindcss.svg" },
-    { name: "Redux", src: "/redux.svg" },
-    { name: "jQuery", src: "/jquery.svg" },
+    { name: "JavaScript", src: "/tech_icons/js.svg" },
+    { name: "TypeScript", src: "/tech_icons//ts.svg" },
+    { name: "React", src: "/tech_icons/react.svg" },
+    { name: "NextJs", src: "/tech_icons/nextjs.svg" },
+    { name: "React Native", src: "/tech_icons/react_native.svg" },
+    { name: "Expo", src: "/tech_icons/expo.svg" },
+    { name: "Tailwind CSS", src: "/tech_icons/tailwindcss.svg" },
+    { name: "Redux", src: "/tech_icons/redux.svg" },
+    { name: "jQuery", src: "/tech_icons/jquery.svg" },
+    { name: "HTML", src: "/tech_icons/html.svg" },
+    { name: "CSS", src: "/tech_icons/css.svg" },
   ];
 
   const backendSvg = [
-    { name: "NodeJS", src: "/nodejs.svg" },
-    { name: "ExpressJS", src: "/express.svg" },
-    { name: "NestJS", src: "/nestjs.svg" },
-    { name: "C#", src: "/c_sharp.svg" },
-    { name: ".NET", src: "/net.svg" },
-    { name: "Adobe ColdFusion", src: "/cf.svg" },
-    { name: "Python", src: "/python.svg" },
-    { name: "django", src: "/django.svg" },
-    { name: "GO", src: "/go.svg" },
+    { name: "NodeJS", src: "/tech_icons/nodejs.svg" },
+    { name: "ExpressJS", src: "/tech_icons/express.svg" },
+    { name: "NestJS", src: "/tech_icons/nestjs.svg" },
+    { name: "C#", src: "/tech_icons/c_sharp.svg" },
+    { name: ".NET", src: "/tech_icons/net.svg" },
+    { name: "Adobe ColdFusion", src: "/tech_icons/cf.svg" },
+    { name: "Python", src: "/tech_icons/python.svg" },
+    { name: "Django", src: "/tech_icons/django.svg" },
+    { name: "GO", src: "/tech_icons/go.svg" },
   ];
 
   const dbSvg = [
-    { name: "Microsoft SQL Server", src: "/msftsql.svg" },
-    { name: "PostgreSQL", src: "/psql.svg" },
+    { name: "Microsoft SQL Server", src: "/tech_icons/msftsql.svg" },
+    { name: "PostgreSQL", src: "/tech_icons/psql.svg" },
   ];
 
   const toolsSvg = [
-    { name: "AWS", src: "/aws.svg" },
-    { name: "AWS-EC2", src: "/aws-ec2.svg" },
-    { name: "AWS-Route 53", src: "/aws-route53.svg" },
-    { name: "Docker", src: "/docker.svg" },
-    { name: "Nginx", src: "/nginx.svg" },
-    { name: "Ubuntu", src: "/ubuntu.svg" },
-    { name: "Git", src: "/git.svg" },
-    { name: "SQL Server Reporting Services", src: "/ssrs.png" },
-    { name: "Epicor ERP System", src: "/epicor.png" },
-    { name: "Window Server", src: "/windowserver.svg" },
-    { name: "Postman", src: "/postman.svg" },
-    { name: "Insomnia", src: "/insomnia.svg" },
-    { name: "Jira", src: "/jira.svg" },
-    { name: "Figma", src: "/figma.svg" },
+    { name: "AWS", src: "/tech_icons/aws.svg" },
+    { name: "AWS-EC2", src: "/tech_icons/aws-ec2.svg" },
+    { name: "AWS-Route 53", src: "/tech_icons/aws-route53.svg" },
+    { name: "Docker", src: "/tech_icons/docker.svg" },
+    { name: "Nginx", src: "/tech_icons/nginx.svg" },
+    { name: "Ubuntu", src: "/tech_icons/ubuntu.svg" },
+    { name: "Git", src: "/tech_icons/git.svg" },
+    { name: "SQL Server Reporting Services", src: "/tech_icons/ssrs.png" },
+    { name: "Epicor ERP System", src: "/tech_icons/epicor.png" },
+    { name: "Window Server", src: "/tech_icons/windowserver.svg" },
+    { name: "Postman", src: "/tech_icons/postman.svg" },
+    { name: "Insomnia", src: "/tech_icons/insomnia.svg" },
+    { name: "Jira", src: "/tech_icons/jira.svg" },
+    { name: "Figma", src: "/tech_icons/figma.svg" },
   ];
 
   return (
@@ -62,10 +64,10 @@ const AboutPage = () => {
       transition={{ duration: 1 }}
     >
       <div className="container mx-auto px-5">
-        <h1 className="text-4xl sm:mt-3 md:mt-8 lg:mt-8 text-center font-bold text-white-800">
+        <h1 className="text-4xl sm:mt-3 md:mt-8 lg:mt-8 text-center font-bold text-white">
           About Me
         </h1>
-        <p className="mt-3 text-lg text-white-700 mx-5 leading-relaxed">
+        <p className="mt-3 text-lg text-white mx-5 leading-relaxed">
           Experienced Software Engineer and Business Analyst with
           <span className="font-bold text-cyan-400"> over 4 years</span> in
           software development, bridging business needs with technical
@@ -78,13 +80,20 @@ const AboutPage = () => {
 
         <section>
           <div className="mt-10 font-semibold mx-5">
-            <h2 className="text-2xl mb-5 flex items-center text-white-800">
+            <h2 className="text-2xl mb-5 flex items-center text-white">
               Work Experiences
               <FontAwesomeIcon icon={faBriefcase} className="ml-2" />
             </h2>
             <div className="mb-8">
-              <h3 className="text-xl font-bold text-white-800">
-                Software Engineer | TOMY Company Ltd
+              <h3 className="text-xl font-bold text-white">
+                Software Engineer<br></br>
+                <a
+                  href="https://www.takaratomy.co.jp/english/"
+                  target="_blank"
+                  className="text-lg hover:text-slate-300"
+                >
+                  @TOMY Company Ltd
+                </a>
               </h3>
               <p className="text-gray-400">
                 1 year of experience in full-stack development, ERP system
@@ -103,8 +112,15 @@ const AboutPage = () => {
               </ul>
             </div>
             <div className="mb-8">
-              <h3 className="text-xl font-bold text-white-800">
-                Business Analyst | Registration and Electoral Office
+              <h3 className="text-xl font-bold text-white">
+                Business Analyst<br></br>
+                <a
+                  href="https://www.reo.gov.hk/en/"
+                  target="_blank"
+                  className="text-lg hover:text-slate-300"
+                >
+                  @Registration and Electoral Office
+                </a>
               </h3>
               <p className="text-gray-400">
                 4+ years of experience in IT system development, data analysis,
@@ -127,7 +143,7 @@ const AboutPage = () => {
 
         <section className="mb-10">
           <div className="mt-10 font-semibold mx-5">
-            <h2 className="text-2xl mb-5 flex items-center text-white-800">
+            <h2 className="text-2xl mb-5 flex items-center text-white">
               Skills
               <FontAwesomeIcon icon={faLaptopCode} className="ml-2" />
             </h2>

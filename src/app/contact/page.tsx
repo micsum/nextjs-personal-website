@@ -4,11 +4,12 @@ import ContactForm from "../components/ContactForm";
 
 const ContactPage = () => {
   return (
-    <section className="flex flex-col lg:flex-row h-screen lg:py-15 pt-10 sm:pt-16">
+    <section className="flex flex-col lg:flex-row min-h-screen lg:h-screen lg:py-15 pt-10 sm:pt-16">
       <div className="w-full lg:w-1/2 p-10 flex flex-col justify-center">
-        <h1 className="text-4xl font-bold mb-4">Contact me</h1>
-        <p className="text-lg mb-2">
-          Feel free to reach out to me for any inquiries or opportunities.
+        <h1 className="text-4xl font-bold mb-4 text-white">Contact me</h1>
+        <p className="text-lg text-white">
+          Let's Connect and Collaborate! Feel free to reach out for any
+          inquiries or opportunities.
         </p>
         <ContactForm />
       </div>

@@ -49,7 +49,7 @@ export function Navbar() {
             {navLinks.map((link, index) => (
               <li key={index}>
                 <Link
-                  className="block py-2 pl-3 pr-4 text-[#ADB7BE] sm:text-xl rounded md:p-0 hover:text-white"
+                  className="relative after:bg-white after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 block py-2 pl-3 pr-4 text-[#ADB7BE] sm:text-xl rounded md:p-0 hover:text-white"
                   href={link.href}
                   title={link.title}
                 >

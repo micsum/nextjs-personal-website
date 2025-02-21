@@ -7,7 +7,7 @@ export const MapComponent = () => {
   const MapContainerStyle = useMemo(
     () => ({
       width: "100%",
-      height: "90%",
+      height: "100%",
       borderRadius: "15px 15px 15px 15px",
     }),
     []
@@ -53,7 +53,7 @@ export const MapComponent = () => {
             position={selectedMarker}
             onCloseClick={() => setSelectedMarker(null)}
           >
-            <div>
+            <div className="w-full p-2">
               <h2 className="font-bold text-black mb-1">London</h2>
               <p className="font-normal text-gray-600 mb-2">Woolwich, SE28</p>
               <a

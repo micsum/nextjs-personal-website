@@ -11,11 +11,11 @@ import { faFileArrowDown } from "@fortawesome/free-solid-svg-icons/faFileArrowDo
 export const Intro = () => {
   const downloadCV = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    window.open("/Resume of Michael Sum.docx");
+    window.open("/profile/Resume of Michael Sum.docx");
   }, []);
 
   return (
-    <section className="lg:py-16 pt-20 sm:pt-16 flex items-center justify-center">
+    <section className="lg:py-16 pt-20 sm:pt-16 flex items-center justify-center h-[80vh]">
       <div className="flex flex-col py-4 lg:mt-5 sm:mt-5 items-center">
         <div className="flex flex-col lg:flex-row items-center lg:items-start w-full max-w-screen-xl px-4 gap-4">
           <motion.div
@@ -76,7 +76,7 @@ export const Intro = () => {
             className="lg:w-1/3 flex justify-center lg:justify-end"
           >
             <Image
-              src="/profile_pic.jpeg"
+              src="/profile/profile_pic.jpeg"
               alt="profile picture"
               className="rounded-full"
               width={220}
