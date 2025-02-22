@@ -4,9 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { render } from "@react-email/components";
 import { ReactElement } from "react";
 import Mail from "nodemailer/lib/mailer";
-import { Ratelimit } from "@upstash/ratelimit";
-import { kv } from "@vercel/kv";
-import * as cache from "memory-cache";
 
 export async function POST(req: NextRequest) {
   const { name, email, subject, message, copy } = await req.json();
