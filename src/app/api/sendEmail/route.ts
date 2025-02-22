@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     });
 
     const ip = req.headers.get("x-forwarded-for") || "unknown";
-    const { success, remaining, reset } = await ratelimit.limit(ip);
+    const { success, reset } = await ratelimit.limit(ip);
 
     if (!success) {
       return NextResponse.json(

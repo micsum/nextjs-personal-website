@@ -8,7 +8,7 @@ const ContactPage = () => {
       <div className="w-full lg:w-1/2 p-10 flex flex-col justify-center">
         <h1 className="text-4xl font-bold mb-4 text-white">Contact me</h1>
         <p className="text-lg text-white">
-          Let's Connect and Collaborate! Feel free to reach out for any
+          Let&apos;s Connect and Collaborate! Feel free to reach out for any
           inquiries or opportunities.
         </p>
         <ContactForm />

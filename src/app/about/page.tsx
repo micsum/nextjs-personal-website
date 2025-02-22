@@ -75,7 +75,8 @@ const AboutPage = () => {
           <br />
           <br />I excel in building user-focused applications and collaborating
           with diverse stakeholders. Passionate about continuous learning and
-          innovation, I'm eager to transition fully into a development role.
+          innovation, I&apos;m eager to transition fully into a development
+          role.
         </p>
 
         <section>
