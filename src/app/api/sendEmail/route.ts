@@ -6,7 +6,6 @@ import { ReactElement } from "react";
 import Mail from "nodemailer/lib/mailer";
 import { Ratelimit } from "@upstash/ratelimit";
 import { kv } from "@vercel/kv";
-
 import * as cache from "memory-cache";
 
 export async function POST(req: NextRequest) {
@@ -55,7 +54,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           error: `Too many requests. Try again in ${Math.ceil(
-            reset - Date.now() / 1000
+            (reset - Date.now()) / 1000
           )} seconds.`,
         },
         { status: 429 }
@@ -104,7 +103,10 @@ export async function POST(req: NextRequest) {
       process.env.HOST_EMAIL_PASS,
       error
     );
-    return;
+    return NextResponse.json(
+      { error: "Mail server verification failed." },
+      { status: 500 }
+    );
   }
 
   try {
