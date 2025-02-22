@@ -1,13 +1,16 @@
-import { EmailTemplate } from "@/app/components/EmailTemplate";
+import { EmailTemplate } from "@/email/EmailTemplate";
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const fromEmail = process.env.HOST_EMAIL || "";
 
+interface ResendError extends Error {
+  statusCode?: number;
+}
+
 export async function POST(req: NextRequest) {
-  const formData = await req.json();
-  const { name, email, subject, message, copy } = formData;
+  const { name, email, subject, message, copy } = await req.json();
 
   if (!message || !email || !name || !subject) {
     return NextResponse.json(
@@ -17,19 +20,28 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { data, error } = await resend.emails.send({
-      from: `Michael - Personal Website <${fromEmail}>`,
+    const emailData = {
+      from: "Acme <onboarding@resend.dev>",
       to: fromEmail,
-      cc: copy ? email : "",
+      cc: email,
       subject: "Message from Personal Website",
       react: await EmailTemplate({ name, email, message, subject }),
-    });
+    };
+
+    console.log("Sending email with data:", emailData);
+
+    const { data, error } = await resend.emails.send(emailData);
 
     if (error) {
-      return NextResponse.json({ error }, { status: 500 });
+      console.log("error", error.message);
+      return NextResponse.json(
+        { error: error.message },
+        { status: (error as ResendError).statusCode }
+      );
     }
+    console.log("copy value: ", copy);
 
-    return NextResponse.json(data);
+    return NextResponse.json({ data });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }

@@ -11,7 +11,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { Toaster } from "@/components/ui/sonner";
 
 import {
   Form,
@@ -24,8 +23,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const ContactForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const personalInfo = [
     { media: "email", link: "mailto:micsum@connect.hku.hk" },
     { media: "github", link: "https://github.com/micsum" },
@@ -66,15 +69,43 @@ const ContactForm = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {}
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    try {
+      await toast.promise(sendEmail(values), {
+        loading: "Sending message...",
+        success: "Message sent!",
+        error: "Failed to send message. Please try again.",
+      });
+    } catch (error) {
+      console.error("Error sending email:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
-  async function sendEmail() {
-    return;
+  async function sendEmail(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await fetch("/api/sendEmail/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send email.");
+      }
+      return await response.json();
+    } catch (error) {
+      throw error;
+    }
   }
 
   return (
     <section className="flex flex-col items-center justify-center py-10">
-      <div className="socials flex flex-row gap-4 mb-8">
+      <div className="socials flex flex-row gap-4 mb-5">
         {personalInfo.map((contact, index) => (
           <Link key={index} href={contact.link} target="_blank">
             <FontAwesomeIcon
@@ -84,7 +115,7 @@ const ContactForm = () => {
           </Link>
         ))}
       </div>
-      <div className="w-full max-w-3xl bg-[#1a1a1a] p-8 rounded-lg shadow-lg">
+      <div className="w-full max-w-3xl p-8 rounded-lg shadow-lg">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="flex flex-col gap-6 sm:flex-row">
@@ -189,10 +220,11 @@ const ContactForm = () => {
 
             <Button
               type="submit"
-              className="w-full sm:w-auto rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white font-bold py-2 px-4"
+              className="w-full sm:w-auto rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold py-2 px-4"
+              disabled={isLoading}
             >
-              Send Message
-              <Loader2 size={16} />
+              {isLoading && <Loader2 className="mr-2 animate-spin" size={16} />}
+              {isLoading ? "Sending Message..." : "Send Message"}
             </Button>
           </form>
         </Form>
