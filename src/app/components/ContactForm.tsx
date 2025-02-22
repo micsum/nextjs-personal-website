@@ -11,6 +11,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import useSWRMutation from "swr/mutation";
 
 import {
   Form,
@@ -23,12 +25,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useState } from "react";
-import { toast } from "sonner";
 
 const ContactForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
   const personalInfo = [
     { media: "email", link: "mailto:micsum@connect.hku.hk" },
     { media: "github", link: "https://github.com/micsum" },
@@ -54,7 +52,7 @@ const ContactForm = () => {
     subject: z.string().min(2, { message: "Please provide a valid subject!" }),
     message: z
       .string()
-      .min(10, { message: "Please enter a least 10 characters!" }),
+      .min(10, { message: "Please enter at least 10 characters!" }),
     copy: z.boolean(),
   });
 
@@ -69,38 +67,45 @@ const ContactForm = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    try {
-      await toast.promise(sendEmail(values), {
-        loading: "Sending message...",
-        success: "Message sent!",
-        error: "Failed to send message. Please try again.",
-      });
-    } catch (error) {
-      console.error("Error sending email:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function sendEmail(values: z.infer<typeof formSchema>) {
+  async function sendEmail(
+    url: string,
+    { arg }: { arg: z.infer<typeof formSchema> }
+  ) {
     try {
       const response = await fetch("/api/sendEmail/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(arg),
       });
-
       if (!response.ok) {
         throw new Error("Failed to send email.");
       }
-      return await response.json();
+      const json = await response.json();
+      form.reset();
+      return json;
     } catch (error) {
+      console.error("Error in sendEmail:", error);
       throw error;
     }
+  }
+  const { trigger, isMutating } = useSWRMutation("/api/sendEmail/", sendEmail);
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await toast.promise(trigger(values), {
+        loading: "Sending message...",
+        success: "Message sent!",
+        error: "Failed to send message. Please try again.",
+      });
+      console.log("Loading State1:", isMutating);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("An error occurred while sending the message.");
+    } finally {
+    }
+    console.log("Loading State2:", isMutating);
   }
 
   return (
@@ -115,7 +120,7 @@ const ContactForm = () => {
           </Link>
         ))}
       </div>
-      <div className="w-full max-w-3xl p-8 rounded-lg shadow-lg">
+      <div className="w-full max-w-3xl p-8 rounded-lg shadow-lg bg-gray-800">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="flex flex-col gap-6 sm:flex-row">
@@ -123,20 +128,19 @@ const ContactForm = () => {
                 control={form.control}
                 name="name"
                 render={({ field }) => (
-                  <FormItem className="flex-1 ">
+                  <FormItem className="flex-1">
                     <FormLabel className="font-bold text-white">Name</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Your Name"
                         {...field}
-                        className="text-white font-semibold placeholder-[#9CA2A9] focus:border-cyan-500"
-                      ></Input>
+                        className="text-white font-semibold placeholder-gray-500 focus:border-cyan-500"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="email"
@@ -149,8 +153,8 @@ const ContactForm = () => {
                       <Input
                         placeholder="user@example.com"
                         {...field}
-                        className="text-white font-semibold placeholder-[#9CA2A9] focus:border-cyan-500"
-                      ></Input>
+                        className="text-white font-semibold placeholder-gray-500 focus:border-cyan-500"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -169,14 +173,13 @@ const ContactForm = () => {
                     <Input
                       placeholder="Subject for message"
                       {...field}
-                      className="text-white font-semibold placeholder-[#9CA2A9] focus:border-cyan-500"
-                    ></Input>
+                      className="text-white font-semibold placeholder-gray-500 focus:border-cyan-500"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="message"
@@ -190,14 +193,13 @@ const ContactForm = () => {
                       placeholder="Enter your message"
                       rows={10}
                       {...field}
-                      className=" placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 font-semibold focus:border-cyan-500"
-                    ></Textarea>
+                      className="placeholder-gray-500 text-white text-sm rounded-lg block w-full p-2.5 font-semibold focus:border-cyan-500"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="copy"
@@ -210,21 +212,26 @@ const ContactForm = () => {
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={field.onChange}
-                      className="border-slate-100 "
+                      className="border-slate-100"
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <Button
               type="submit"
-              className="w-full sm:w-auto rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold py-2 px-4"
-              disabled={isLoading}
+              disabled={isMutating}
+              className="w-full sm:w-auto rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold py-2 px-4 hover:from-secondary-500 hover:to-primary-500"
             >
-              {isLoading && <Loader2 className="mr-2 animate-spin" size={16} />}
-              {isLoading ? "Sending Message..." : "Send Message"}
+              {isMutating ? (
+                <>
+                  Sending Message...
+                  <Loader2 className="mr-2 animate-spin" size={16} />
+                </>
+              ) : (
+                "Send Message"
+              )}
             </Button>
           </form>
         </Form>

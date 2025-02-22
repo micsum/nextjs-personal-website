@@ -53,7 +53,7 @@ export const Intro = () => {
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/contact"
-                className="px-6 py-3 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white text-center"
+                className="px-6 py-3 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white text-center hover:from-secondary-500 hover:to-primary-500 "
               >
                 Contact Me
               </Link>
