@@ -79,9 +79,13 @@ const ContactForm = () => {
         },
         body: JSON.stringify(arg),
       });
+
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error response text:", errorText);
         throw new Error("Failed to send email.");
       }
+
       const json = await response.json();
       form.reset();
       return json;
@@ -90,6 +94,7 @@ const ContactForm = () => {
       throw error;
     }
   }
+
   const { trigger, isMutating } = useSWRMutation("/api/sendEmail/", sendEmail);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -104,8 +109,8 @@ const ContactForm = () => {
       console.error("Error sending email:", error);
       toast.error("An error occurred while sending the message.");
     } finally {
+      console.log("Loading State2:", isMutating);
     }
-    console.log("Loading State2:", isMutating);
   }
 
   return (
