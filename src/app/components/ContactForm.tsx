@@ -115,7 +115,7 @@ const ContactForm = () => {
           <Link key={index} href={contact.link} target="_blank">
             <FontAwesomeIcon
               icon={getIcon(contact.media) ?? faBug}
-              className="text-4xl hover:animate-pulse shadow-xl shadow-cyan-500/80 mx-1 mt-1 text-white"
+              className="text-4xl hover:animate-pulse mx-1 mt-1 text-white"
             />
           </Link>
         ))}
