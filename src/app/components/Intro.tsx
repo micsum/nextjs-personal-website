@@ -15,8 +15,8 @@ export const Intro = () => {
   }, []);
 
   return (
-    <section className="lg:py-16 pt-20 sm:pt-16 flex items-center justify-center h-[80vh]">
-      <div className="flex flex-col py-4 lg:mt-5 sm:mt-5 items-center">
+    <section className="lg:py-8 pt-12 sm:pt-8 flex items-center justify-center h-[80vh]">
+      <div className="flex flex-col py-2 lg:mt-2 sm:mt-2 items-center">
         <div className="flex flex-col lg:flex-row items-center lg:items-start w-full max-w-screen-xl px-4 gap-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -24,28 +24,30 @@ export const Intro = () => {
             transition={{ duration: 0.5 }}
             className="col-span-1 sm:col-span-7 place-self-center text-center sm:text-left"
           >
-            <h1 className="text-white mb-2 text-2xl sm:text-3xl lg:text-6xl lg:leading-normal font-extrabold">
+            <h1 className="text-white mb-2 text-2xl sm:text-3xl lg:text-5xl lg:leading-normal font-extrabold">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
                 Hello, I&apos;m{" "}
               </span>
               <br />
-              <TypeAnimation
-                sequence={[
-                  "Michael",
-                  1500,
-                  "Full Stack Developer",
-                  1500,
-                  "Software Engineer",
-                  1500,
-                  "Business Analyst",
-                  1500,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-              />
+              <span className="inline-block w-[300px] sm:w-[400px] lg:w-[500px] overflow-hidden whitespace-nowrap">
+                <TypeAnimation
+                  sequence={[
+                    "Michael",
+                    1500,
+                    "Full Stack Developer",
+                    1500,
+                    "Software Engineer",
+                    1500,
+                    "Business Analyst",
+                    1500,
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                />
+              </span>
             </h1>
-            <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
+            <p className="text-[#ADB7BE] text-base sm:text-lg mb-4 lg:text-xl">
               <Link href="/about" className="hover:text-white hover:underline">
                 Over 4 years experience in software development ... Read More
               </Link>

@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import useSWRMutation from "swr/mutation";
+import { motion } from "framer-motion";
 
 import {
   Form,
@@ -114,21 +115,49 @@ const ContactForm = () => {
   }
 
   return (
-    <section className="flex flex-col items-center justify-center py-10">
-      <div className="socials flex flex-row gap-4 mb-5">
+    <motion.section
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex flex-col items-center justify-center py-5"
+    >
+      <h1 className="text-4xl font-bold mb-2 text-white">Contact me</h1>
+      <p className="text-lg text-white mb-4">
+        Let's Connect and Collaborate! Feel free to reach out for any inquiries
+        or opportunities.
+      </p>
+      <motion.div
+        className="socials flex flex-row gap-4 mb-5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.3 }}
+      >
         {personalInfo.map((contact, index) => (
           <Link key={index} href={contact.link} target="_blank">
-            <FontAwesomeIcon
-              icon={getIcon(contact.media) ?? faBug}
-              className="text-4xl hover:animate-pulse mx-1 mt-1 text-white"
-            />
+            <motion.div
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-4xl mx-1 mt-3 text-white"
+            >
+              <FontAwesomeIcon icon={getIcon(contact.media) ?? faBug} />
+            </motion.div>
           </Link>
         ))}
-      </div>
-      <div className="w-full max-w-3xl p-8 rounded-lg shadow-lg bg-gray-800">
+      </motion.div>
+      <motion.div
+        className="w-full max-w-3xl p-8 rounded-lg shadow-lg bg-gray-800"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4, duration: 0.3 }}
+      >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="flex flex-col gap-6 sm:flex-row">
+            <motion.div
+              className="flex flex-col gap-6 sm:flex-row"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.3 }}
+            >
               <FormField
                 control={form.control}
                 name="name"
@@ -165,83 +194,107 @@ const ContactForm = () => {
                   </FormItem>
                 )}
               />
-            </div>
-            <FormField
-              control={form.control}
-              name="subject"
-              render={({ field }) => (
-                <FormItem className="flex-1 relative">
-                  <FormLabel className="font-bold text-white">
-                    Subject
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Subject for message"
-                      {...field}
-                      className="text-white font-semibold placeholder-gray-500 focus:border-cyan-500"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-bold text-white">
-                    Message
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Enter your message"
-                      rows={10}
-                      {...field}
-                      className="placeholder-gray-500 text-white text-sm rounded-lg block w-full p-2.5 font-semibold focus:border-cyan-500"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="copy"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-2 space-y-0">
-                  <FormLabel className="font-semibold text-white cursor-pointer">
-                    Send a copy to yourself
-                  </FormLabel>
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      className="border-slate-100"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button
-              type="submit"
-              disabled={isMutating}
-              className="w-full sm:w-auto rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold py-2 px-4 hover:from-secondary-500 hover:to-primary-500"
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.3 }}
             >
-              {isMutating ? (
-                <>
-                  Sending Message...
-                  <Loader2 className="mr-2 animate-spin" size={16} />
-                </>
-              ) : (
-                "Send Message"
-              )}
-            </Button>
+              <FormField
+                control={form.control}
+                name="subject"
+                render={({ field }) => (
+                  <FormItem className="flex-1 relative">
+                    <FormLabel className="font-bold text-white">
+                      Subject
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Subject for message"
+                        {...field}
+                        className="text-white font-semibold placeholder-gray-500 focus:border-cyan-500"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.3 }}
+            >
+              <FormField
+                control={form.control}
+                name="message"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold text-white">
+                      Message
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Enter your message"
+                        rows={10}
+                        {...field}
+                        className="placeholder-gray-500 text-white text-sm rounded-lg block w-full p-2.5 font-semibold focus:border-cyan-500"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.3 }}
+            >
+              <FormField
+                control={form.control}
+                name="copy"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-2 space-y-0">
+                    <FormLabel className="font-semibold text-white cursor-pointer">
+                      Send a copy to yourself
+                    </FormLabel>
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        className="border-slate-100"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.4, duration: 0.3 }}
+            >
+              <Button
+                type="submit"
+                disabled={isMutating}
+                className="w-full sm:w-auto rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold py-2 px-4 hover:from-secondary-500 hover:to-primary-500"
+              >
+                {isMutating ? (
+                  <>
+                    Sending Message...
+                    <Loader2 className="mr-2 animate-spin" size={16} />
+                  </>
+                ) : (
+                  "Send Message"
+                )}
+              </Button>
+            </motion.div>
           </form>
         </Form>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

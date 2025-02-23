@@ -2,6 +2,7 @@
 
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
 export const MapComponent = () => {
   const MapContainerStyle = useMemo(
@@ -36,7 +37,12 @@ export const MapComponent = () => {
     useState<google.maps.LatLngLiteral | null>(null);
 
   return (
-    <div className="w-full h-full">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.3, duration: 0.3 }}
+      className="w-full h-full"
+    >
       <GoogleMap
         mapContainerStyle={MapContainerStyle}
         center={defaultMapCenter}
@@ -68,6 +74,6 @@ export const MapComponent = () => {
           </InfoWindow>
         )}
       </GoogleMap>
-    </div>
+    </motion.div>
   );
 };
