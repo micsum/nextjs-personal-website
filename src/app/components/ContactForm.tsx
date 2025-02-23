@@ -123,8 +123,8 @@ const ContactForm = () => {
     >
       <h1 className="text-4xl font-bold mb-2 text-white">Contact me</h1>
       <p className="text-lg text-white mb-4">
-        Let's Connect and Collaborate! Feel free to reach out for any inquiries
-        or opportunities.
+        Let&apos;s Connect and Collaborate! Feel free to reach out for any
+        inquiries or opportunities.
       </p>
       <motion.div
         className="socials flex flex-row gap-4 mb-5"
