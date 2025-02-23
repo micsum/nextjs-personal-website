@@ -10,10 +10,7 @@ export type SpotifyTrackData = {
   currentlyPlaying: boolean;
 };
 
-export interface ExternalUrls {
-  spotify: string;
-}
 export interface Artists {
   name: string;
-  external_urls: ExternalUrls;
+  external_urls: { spotify: string };
 }

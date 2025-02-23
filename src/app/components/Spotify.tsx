@@ -4,6 +4,7 @@ import { faSpotify } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
 import { SpotifyTrackData } from "../types/spotify";
 import useSWR from "swr";
+import { motion } from "framer-motion";
 
 const Spotify = () => {
   const spotifyData = async (url: string) => {
@@ -41,8 +42,17 @@ const Spotify = () => {
 
   if (data) {
     return (
-      <div className="flex flex-col items-center mb-10">
-        <div className="relative inline-flex min-w-[250px] rounded-xl bg-slate-700 p-3 pr-3 md:pr-10">
+      <motion.div
+        className="flex flex-col items-center mb-10"
+        animate={{
+          y: [0, 50, 0],
+          transition: { ease: ["easeInOut"] },
+        }}
+      >
+        <motion.div
+          className="relative inline-flex min-w-[250px] max-w-md rounded-xl bg-slate-700 p-4 shadow-lg transition-transform duration-300 hover:scale-105"
+          whileHover={{ scale: 1.2 }}
+        >
           <a href={data.href} target="_blank" rel="noopener noreferrer">
             <div className="w-[75px] overflow-hidden rounded-lg sm:w-[100px]">
               <Image
@@ -50,31 +60,32 @@ const Spotify = () => {
                 alt="Album art"
                 width={100}
                 height={100}
+                className="rounded-lg"
               />
               <div className="absolute top-2 right-3 z-20 w-6">
-                <FontAwesomeIcon icon={faSpotify} size="2x" color="#63E6BE" />
+                <FontAwesomeIcon icon={faSpotify} size="2xl" color="#63E6BE" />
               </div>
             </div>
           </a>
 
           <div className="mx-5 overflow-x-hidden">
-            <div className="mb-3 text-xs font-semibold text-gray-300 sm:text-sm">
+            <div className="mb-2 text-xs font-semibold text-gray-300 sm:text-sm mr-2">
               {data.currentlyPlaying ? "LISTENING TO SPOTIFY" : "LAST PLAYED"}
             </div>
             <a
               href={data.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="line-clamp-1 text-base font-bold hover:line-clamp-none hover:animate-marquee hover:whitespace-nowrap hover:underline sm:text-lg"
+              className="text-lg font-bold text-white hover:underline hover:text-[#63E6BE] sm:text-xl"
             >
               {data.name}
             </a>
-            <div className="line-clamp-1 text-sm font-semibold hover:line-clamp-none hover:animate-marquee hover:whitespace-nowrap sm:text-base">
+            <div className="text-sm font-semibold text-gray-400 sm:text-base">
               By
               {data.artists.map((artist, i) => (
                 <span key={`artist${i}`} className="ml-1">
                   <a
-                    className="hover:cursor-pointer hover:underline"
+                    className="hover:underline hover:text-[#63E6BE]"
                     href={artist.href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -86,8 +97,8 @@ const Spotify = () => {
               ))}
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     );
   }
 };
