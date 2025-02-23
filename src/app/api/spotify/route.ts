@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { Artists } from "@/app/types/spotify";
 
 async function getAccessToken() {
   const myHeaders = new Headers();
@@ -85,7 +86,7 @@ export async function GET() {
     if (track && track.is_playing) {
       return NextResponse.json({
         name: track.item.name,
-        artists: track.item.artists.map((artist: any) => {
+        artists: track.item.artists.map((artist: Artists) => {
           return { name: artist.name, href: artist.external_urls.spotify };
         }),
         href: track.item.external_urls.spotify,
@@ -99,9 +100,11 @@ export async function GET() {
     if (lastPlayedTrack && lastPlayedTrack.items && lastPlayedTrack.items[0]) {
       return NextResponse.json({
         name: lastPlayedTrack.items[0].track.name,
-        artists: lastPlayedTrack.items[0].track.artists.map((artist: any) => {
-          return { name: artist.name, href: artist.external_urls.spotify };
-        }),
+        artists: lastPlayedTrack.items[0].track.artists.map(
+          (artist: Artists) => {
+            return { name: artist.name, href: artist.external_urls.spotify };
+          }
+        ),
         href: lastPlayedTrack.items[0].track.external_urls.spotify,
         albumArt: lastPlayedTrack.items[0].track.album.images[0],
         currentlyPlaying: false,

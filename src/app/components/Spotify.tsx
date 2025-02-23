@@ -1,7 +1,8 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
-
+import Image from "next/image";
+import { SpotifyTrackData } from "../types/spotify";
 import useSWR from "swr";
 
 const Spotify = () => {
@@ -44,7 +45,7 @@ const Spotify = () => {
         <div className="relative inline-flex min-w-[250px] rounded-xl bg-slate-700 p-3 pr-3 md:pr-10">
           <a href={data.href} target="_blank" rel="noopener noreferrer">
             <div className="w-[75px] overflow-hidden rounded-lg sm:w-[100px]">
-              <img
+              <Image
                 src={data.albumArt.url}
                 alt="Album art"
                 width={100}

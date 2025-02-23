@@ -12,6 +12,7 @@ import {
   Heading,
   Row,
 } from "@react-email/components";
+import Image from "next/image";
 
 interface EmailTemplateProps {
   name: string;
@@ -64,23 +65,23 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
               <Text style={footer}>
                 Follow me on:
                 <Link style={iconLink} href="https://github.com/micsum">
-                  <img
+                  <Image
                     src="https://img.icons8.com/?size=100&id=62856&format=png&color=000000"
                     width={20}
                     height={20}
                     alt="github"
-                  ></img>
+                  ></Image>
                 </Link>
                 <Link
                   style={iconLink}
                   href="https://www.linkedin.com/in/michaelsum"
                 >
-                  <img
+                  <Image
                     src="https://img.icons8.com/?size=100&id=13930&format=png&color=000000"
                     width={20}
                     height={20}
                     alt="linkedin"
-                  ></img>
+                  ></Image>
                 </Link>
               </Text>
             </Row>
