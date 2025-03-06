@@ -15,8 +15,8 @@ export const Intro = () => {
   }, []);
 
   return (
-    <section className="lg:py-8 pt-12 sm:pt-8 flex items-center justify-center h-[80vh]">
-      <div className="flex flex-col py-2 lg:mt-2 sm:mt-2 items-center">
+    <section className="lg:py-3 pt-12 sm:mt-8 md:mt-2 flex items-center justify-center">
+      <div className="flex flex-col py-2 lg:mt-20 mt-5 items-center">
         <div className="flex flex-col lg:flex-row items-center lg:items-start w-full max-w-screen-xl px-4 gap-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -26,7 +26,7 @@ export const Intro = () => {
           >
             <h1 className="text-white mb-2 text-2xl sm:text-3xl lg:text-5xl lg:leading-normal font-extrabold">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
-                Hello, I&apos;m{" "}
+                Hello, I&apos;m
               </span>
               <br />
               <span className="inline-block w-[300px] sm:w-[400px] lg:w-[500px] overflow-hidden whitespace-nowrap">

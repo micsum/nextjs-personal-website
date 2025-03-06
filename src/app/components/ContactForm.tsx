@@ -122,7 +122,7 @@ const ContactForm = () => {
       className="flex flex-col items-center justify-center py-5"
     >
       <h1 className="text-4xl font-bold mb-2 text-white">Contact me</h1>
-      <p className="text-lg text-white mb-4">
+      <p className="text-lg text-white mb-4 text-center">
         Let&apos;s Connect and Collaborate! Feel free to reach out for any
         inquiries or opportunities.
       </p>
