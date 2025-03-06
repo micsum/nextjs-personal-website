@@ -137,9 +137,12 @@ const ContactForm = () => {
             <motion.div
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
-              className="text-4xl mx-1 mt-3 text-white"
+              className="text-4xl mx-1 mt-3 text-white hover:animate-pulse"
             >
-              <FontAwesomeIcon icon={getIcon(contact.media) ?? faBug} />
+              <FontAwesomeIcon
+                icon={getIcon(contact.media) ?? faBug}
+                className=""
+              />
             </motion.div>
           </Link>
         ))}
