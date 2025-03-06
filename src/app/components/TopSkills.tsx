@@ -17,7 +17,7 @@ import { Tooltip } from "./ui/Tooltip";
 import Image from "next/image";
 
 export default function TopSkills() {
-  let topSkillsSvg = [
+  const topSkillsSvg = [
     { name: "React", src: "/tech_icons/react.svg" },
     { name: "NextJs", src: "/tech_icons/nextjs.svg" },
     { name: "NodeJs", src: "/tech_icons/nodejs.svg" },
