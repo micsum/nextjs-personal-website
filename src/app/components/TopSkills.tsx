@@ -49,7 +49,7 @@ export default function TopSkills() {
               All Skills
             </motion.button>
           </DialogTrigger>
-          <DialogContent className="flex max-h-auto max-w-[55vw] sm:max-w-auto flex-col  bg-gray-800 text-white p-5 border-cyan-700">
+          <DialogContent className="flex max-h-auto max-w-[90vw] sm:max-w-[55vw] flex-col bg-gray-800 text-white p-5 border-cyan-700">
             <DialogHeader className="pb-0">
               <DialogTitle className="text-2xl flex items-center text-white">
                 All Skills
