@@ -34,6 +34,7 @@ const projects = [
       { name: "ExpressJS", src: "/tech_icons/express.svg" },
       { name: "Python", src: "/tech_icons/python.svg" },
       { name: "Django", src: "/tech_icons/django.svg" },
+      { name: "Socket.IO", src: "/tech_icons/socketio.svg" },
       { name: "PostgreSQL", src: "/tech_icons/psql.svg" },
       { name: "Tailwind CSS", src: "/tech_icons/tailwindcss.svg" },
       { name: "AWS", src: "/tech_icons/aws.svg" },
