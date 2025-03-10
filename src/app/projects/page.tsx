@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const projects = [
   {
-    title: "beHealthy (Health Management App",
+    title: "beHealthy (Health Management App)",
     techStack: [
       { name: "React Native", src: "/tech_icons/react_native.svg" },
       { name: "Redux", src: "/tech_icons/redux.svg" },
