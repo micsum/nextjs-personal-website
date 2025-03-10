@@ -30,6 +30,7 @@ const projects = [
   {
     title: "fastdpay (OCR receipt read and split web app)",
     techStack: [
+      { name: "TypeScript", src: "/tech_icons/ts.svg" },
       { name: "JavaScript", src: "/tech_icons/js.svg" },
       { name: "ExpressJS", src: "/tech_icons/express.svg" },
       { name: "Python", src: "/tech_icons/python.svg" },
