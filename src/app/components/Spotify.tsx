@@ -44,10 +44,9 @@ const Spotify = () => {
     return (
       <motion.div
         className="flex flex-col items-center mb-10"
-        animate={{
-          y: [0, 50, 0],
-          transition: { ease: ["easeInOut"] },
-        }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 1.5 }}
       >
         <motion.div
           className="relative inline-flex min-w-[250px] max-w-md rounded-xl bg-slate-700 p-4 shadow-lg transition-transform duration-300 hover:scale-105"
@@ -55,13 +54,17 @@ const Spotify = () => {
         >
           <a href={data.href} target="_blank" rel="noopener noreferrer">
             <div className="w-[75px] overflow-hidden rounded-lg sm:w-[100px]">
-              <Image
-                src={data.albumArt.url}
-                alt="Album art"
-                width={100}
-                height={100}
-                className="rounded-lg"
-              />
+              {data.albumArt?.url ? (
+                <Image
+                  src={data.albumArt.url}
+                  alt="Album art"
+                  width={100}
+                  height={100}
+                  className="rounded-lg"
+                />
+              ) : (
+                <div className="w-[100px] h-[100px] bg-gray-800 rounded-lg"></div>
+              )}
               <div className="absolute top-2 right-3 z-20 w-6">
                 <FontAwesomeIcon icon={faSpotify} size="2xl" color="#63E6BE" />
               </div>

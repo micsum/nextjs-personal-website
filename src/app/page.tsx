@@ -4,6 +4,7 @@ import { Intro } from "./components/Intro";
 import ContactForm from "./components/ContactForm";
 import Spotify from "./components/Spotify";
 import TopSkills from "./components/TopSkills";
+import ProjectButton from "./components/ProjectButton";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <div className="flex-grow">
         <Intro />
         <TopSkills />
+        <ProjectButton />
         <Spotify />
         <ContactForm />
       </div>
